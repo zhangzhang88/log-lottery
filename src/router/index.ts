@@ -1,7 +1,9 @@
 import Layout from '@/layout/index.vue'
 import i18n from '@/locales/i18n'
 import Home from '@/views/Home/index.vue'
-import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
+
+const base = import.meta.env.BASE_URL || '/'
 
 export const configRoutes = {
   path: '/config',
@@ -135,7 +137,7 @@ const routes = [
 const envMode=import.meta.env.MODE;
 const router = createRouter({
     // 读取环境变量
-  history: envMode==='file'?createWebHashHistory():createWebHistory(),
+  history: envMode === 'file' ? createWebHashHistory(base) : createWebHistory(base),
   routes,
 })
 
