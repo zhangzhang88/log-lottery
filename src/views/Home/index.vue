@@ -576,8 +576,8 @@ function centerFire(particleRatio: number, opts: any) {
 
 function setDefaultPersonList() {
   personConfig.setDefaultPersonList()
-  // 刷新页面
-  window.location.reload()
+  const baseUrl = import.meta.env.BASE_URL || '/'
+  window.location.href = baseUrl
 }
 // 随机替换数据
 function randomBallData(mod: 'default' | 'lucky' | 'sphere' = 'default') {
