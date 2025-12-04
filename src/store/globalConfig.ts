@@ -2,6 +2,24 @@ import type { IImage, IMusic } from '@/types/storeType'
 import i18n, { browserLanguage } from '@/locales/i18n'
 import { defineStore } from 'pinia'
 import { defaultImageList, defaultMusicList, defaultPatternList } from './data'
+
+const GLOBAL_CONFIG_STORAGE_KEY = 'globalConfig'
+const LEGACY_TOP_TITLE = '大明内阁六部御前奏对'
+if (typeof window !== 'undefined' && window.localStorage) {
+  try {
+    const storedConfig = window.localStorage.getItem(GLOBAL_CONFIG_STORAGE_KEY)
+    if (storedConfig) {
+      const parsed = JSON.parse(storedConfig)
+      if (parsed?.globalConfig?.topTitle === LEGACY_TOP_TITLE) {
+        parsed.globalConfig.topTitle = i18n.global.t('data.defaultTitle')
+        window.localStorage.setItem(GLOBAL_CONFIG_STORAGE_KEY, JSON.stringify(parsed))
+      }
+    }
+  }
+  catch (error) {
+    console.warn('Failed to migrate global config title', error)
+  }
+}
 // import { IPrizeConfig } from '@/types/storeType';
 export const useGlobalConfig = defineStore('global', {
   state() {

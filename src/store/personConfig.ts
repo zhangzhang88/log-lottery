@@ -135,8 +135,19 @@ export const usePersonConfig = defineStore('person', {
       this.personConfig.alreadyPersonList = []
     },
     setDefaultPersonList() {
-      this.personConfig.allPersonList = defaultPersonList
+      const list = defaultPersonList.map((person: IPersonConfig) => ({
+        ...person,
+        department: '801',
+        identity: '学生',
+      }))
+      this.personConfig.allPersonList = list
       this.personConfig.alreadyPersonList = []
+      if (typeof window !== 'undefined' && window.localStorage) {
+        window.localStorage.setItem('personConfig', JSON.stringify({
+          allPersonList: this.personConfig.allPersonList,
+          alreadyPersonList: this.personConfig.alreadyPersonList,
+        }))
+      }
     },
     // 重置所有配置
     reset() {

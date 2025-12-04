@@ -44,6 +44,11 @@ export const defaultPersonList = <IPersonConfig[]>
 
 export const defaultMusicList = [
     {
+        id: `你要跳舞吗-新裤子.mp3${new Date().getTime().toString()}`,
+        name: '你要跳舞吗-新裤子.mp3',
+        url: `${originUrl}/resource/audio/你要跳舞吗-新裤子.mp3`,
+    },
+    {
         id: `Geoff Knorr - China (The Industrial Era).ogg${new Date().getTime().toString()}`,
         name: 'Geoff Knorr - China (The Industrial Era).ogg',
         url: `${originUrl}/resource/audio/Geoff Knorr - China (The Industrial Era).ogg`,
@@ -82,11 +87,6 @@ export const defaultMusicList = [
         id: `大乔小乔 - 相见难别亦难.ogg${new Date().getTime().toString()}`,
         name: '大乔小乔 - 相见难别亦难.ogg',
         url: `${originUrl}/resource/audio/大乔小乔 - 相见难别亦难.ogg`,
-    },
-    {
-        id: `你要跳舞吗-新裤子.mp3${new Date().getTime().toString()}`,
-        name: '你要跳舞吗-新裤子.mp3',
-        url: `${originUrl}/resource/audio/你要跳舞吗-新裤子.mp3`,
     },
     {
         id: `生命-声音玩具.mp3${new Date().getTime().toString()}`,

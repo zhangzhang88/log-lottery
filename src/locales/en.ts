@@ -146,8 +146,4 @@ export default {
     xlsxName: 'personListTemplate-en.xlsx',
     readmeName: 'readme-en.md',
   },
-  footer: {
-    'self-reflection': 'Turn inward and examine yourself when you encounter difficulties in life.',
-    'thiefEasy': 'Thief difficult mountain thief easily, breaking heart.',
-  },
 }
