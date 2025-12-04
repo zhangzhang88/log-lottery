@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
   const chunkName = mode === 'prebuild' ? '[name]' : 'chunk'
 
   return {
-    base: env.VITE_BASE_URL || '/log-lottery/',
+    base: env.VITE_BASE_URL || '/',
     plugins: [
       vue(),
       mode === 'file'
