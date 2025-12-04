@@ -1,35 +1,20 @@
 import type { IPrizeConfig } from '@/types/storeType'
 import { defineStore } from 'pinia'
-import { defaultCurrentPrize, defaultPrizeList } from './data'
+import { defaultPrizeList, defaultTemporaryPrize } from './data'
+
+function createDefaultPrizeState() {
+  const prizeList = structuredClone(defaultPrizeList)
+  return {
+    prizeList,
+    currentPrize: prizeList[0],
+    temporaryPrize: structuredClone(defaultTemporaryPrize),
+  }
+}
 
 export const usePrizeConfig = defineStore('prize', {
   state() {
     return {
-    prizeConfig: {
-      prizeList: structuredClone(defaultPrizeList),
-      currentPrize: structuredClone(defaultCurrentPrize),
-        temporaryPrize: {
-          id: '',
-          name: '',
-          sort: 0,
-          isAll: false,
-          count: 1,
-          isUsedCount: 0,
-          picture: {
-            id: '-1',
-            name: '',
-            url: '',
-          },
-          separateCount: {
-            enable: true,
-            countList: [],
-          },
-          desc: '',
-          isShow: false,
-          isUsed: false,
-          frequency: 1,
-        } as IPrizeConfig,
-      },
+      prizeConfig: createDefaultPrizeState(),
     }
   },
   getters: {
@@ -137,31 +122,7 @@ export const usePrizeConfig = defineStore('prize', {
     },
     // 重置所有配置
     resetDefault() {
-      this.prizeConfig = {
-        prizeList: structuredClone(defaultPrizeList),
-        currentPrize: structuredClone(defaultCurrentPrize),
-        temporaryPrize: {
-          id: '',
-          name: '',
-          sort: 0,
-          isAll: false,
-          count: 1,
-          isUsedCount: 0,
-          picture: {
-            id: '-1',
-            name: '',
-            url: '',
-          },
-          separateCount: {
-            enable: true,
-            countList: [],
-          },
-          desc: '',
-          isShow: false,
-          isUsed: false,
-          frequency: 1,
-        } as IPrizeConfig,
-      }
+      this.prizeConfig = createDefaultPrizeState()
     },
   },
   persist: {

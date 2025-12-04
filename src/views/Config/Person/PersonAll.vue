@@ -13,8 +13,10 @@ import * as XLSX from 'xlsx'
 
 const { t } = useI18n()
 const personConfig = useStore().personConfig
+const globalConfig = useStore().globalConfig
 const prizeConfig = useStore().prizeConfig
 const { getAllPersonList: allPersonList, getAlreadyPersonList: alreadyPersonList } = storeToRefs(personConfig)
+const { getCurrentMusic: currentMusic } = storeToRefs(globalConfig)
 const limitType = '.xlsx,.xls'
 // const personList = ref<any[]>([])
 
@@ -74,6 +76,9 @@ function exportData() {
 function resetData() {
   personConfig.resetAlreadyPerson()
   prizeConfig.resetDefault()
+  if (currentMusic.value.item) {
+    globalConfig.setCurrentMusic(currentMusic.value.item, true)
+  }
 }
 
 function deleteAll() {

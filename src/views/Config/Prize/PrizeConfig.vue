@@ -199,8 +199,13 @@ watch(() => prizeList.value, (val: IPrizeConfig[]) => {
           >
         </label>
         <label class="w-1/2 max-w-xs mb-10 form-control">
-          <div class="label">
+          <div class="label flex items-center gap-2">
             <span class="label-text">{{ t('table.fullParticipation') }}</span>
+            <span
+              class="text-xs text-gray-300 cursor-help"
+              :class="['tooltip', 'tooltip-bottom']"
+              :data-tip="t('tooltip.fullParticipationHint')"
+            >?</span>
           </div>
           <input
             type="checkbox" :checked="item.isAll" class="mt-2 border-solid checkbox checkbox-secondary border-1"

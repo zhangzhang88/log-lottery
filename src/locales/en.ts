@@ -109,6 +109,7 @@ export default {
     doneCount: 'Number of winners',
     edit: 'Edit',
     delete: 'Delete',
+    fullParticipationHint: 'Leave unchecked to allow each person to win only once; checking it lets people win multiple times',
   },
   error: {
     require: 'required field',

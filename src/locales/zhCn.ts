@@ -109,6 +109,7 @@ export default {
     doneCount: '已抽取',
     edit: '编辑',
     delete: '删除',
+    fullParticipationHint: '不勾选时每人只会中奖一次，勾选后可重复中奖',
   },
   error: {
     require: '必填项',

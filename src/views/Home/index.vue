@@ -30,7 +30,7 @@ const prizeConfig = useStore().prizeConfig
 const { getAllPersonList: allPersonList, getNotPersonList: notPersonList, getNotThisPrizePersonList: notThisPrizePersonList,
 } = storeToRefs(personConfig)
 const { getCurrentPrize: currentPrize } = storeToRefs(prizeConfig)
-const { getTopTitle: topTitle, getCardColor: cardColor, getPatterColor: patternColor, getPatternList: patternList, getTextColor: textColor, getLuckyColor: luckyColor, getCardSize: cardSize, getTextSize: textSize, getRowCount: rowCount, getBackground: homeBackground, getIsShowAvatar: isShowAvatar } = storeToRefs(globalConfig)
+const { getTopTitle: topTitle, getCardColor: cardColor, getPatterColor: patternColor, getPatternList: patternList, getTextColor: textColor, getLuckyColor: luckyColor, getCardSize: cardSize, getTextSize: textSize, getRowCount: rowCount, getBackground: homeBackground, getIsShowAvatar: isShowAvatar, getMusicList: musicList, getCurrentMusic: currentMusic } = storeToRefs(globalConfig)
 const tableData = ref<any[]>([])
 const currentStatus = ref(0) // 0为初始状态， 1为抽奖准备状态，2为抽奖中状态，3为抽奖结束状态
 const ballRotationY = ref(0)
@@ -60,6 +60,23 @@ const luckyTargets = ref<any[]>([])
 const luckyCardList = ref<number[]>([])
 const luckyCount = ref(10)
 const personPool = ref<IPersonConfig[]>([])
+
+const DRAW_MUSIC_NAME = '你要跳舞吗-新裤子.mp3'
+const VICTORY_MUSIC_NAME = '与非门 - Happy New Year.ogg'
+
+function resolveAutoMusic(name: string) {
+  if (musicList.value && musicList.value.length > 0) {
+    return musicList.value.find(item => item.name === name) ?? musicList.value[0]
+  }
+  return currentMusic.value?.item
+}
+
+function playAutoMusic(name: string) {
+  const track = resolveAutoMusic(name)
+  if (track) {
+    globalConfig.setCurrentMusic(track, false)
+  }
+}
 
 const intervalTimer = ref<any>(null)
 // 填充数据，填满七行
@@ -397,6 +414,7 @@ function startLottery() {
 
     return
   }
+  playAutoMusic(DRAW_MUSIC_NAME)
   personPool.value = currentPrize.value.isAll ? notThisPrizePersonList.value : notPersonList.value
   // 验证抽奖人数是否还够
   if (personPool.value.length < currentPrize.value.count - currentPrize.value.isUsedCount) {
@@ -485,6 +503,7 @@ async function stopLottery() {
       .onComplete(() => {
         confettiFire()
         resetCamera()
+        playAutoMusic(VICTORY_MUSIC_NAME)
       })
   })
 }
