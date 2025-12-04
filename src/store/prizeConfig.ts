@@ -5,9 +5,9 @@ import { defaultCurrentPrize, defaultPrizeList } from './data'
 export const usePrizeConfig = defineStore('prize', {
   state() {
     return {
-      prizeConfig: {
-        prizeList: defaultPrizeList,
-        currentPrize: defaultCurrentPrize,
+    prizeConfig: {
+      prizeList: structuredClone(defaultPrizeList),
+      currentPrize: structuredClone(defaultCurrentPrize),
         temporaryPrize: {
           id: '',
           name: '',
@@ -138,8 +138,8 @@ export const usePrizeConfig = defineStore('prize', {
     // 重置所有配置
     resetDefault() {
       this.prizeConfig = {
-        prizeList: defaultPrizeList,
-        currentPrize: defaultCurrentPrize,
+        prizeList: structuredClone(defaultPrizeList),
+        currentPrize: structuredClone(defaultCurrentPrize),
         temporaryPrize: {
           id: '',
           name: '',
