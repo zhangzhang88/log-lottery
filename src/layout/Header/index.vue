@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { navList } from './config'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 function skip(url: string) {
-  window.open(url, '_self')
+  router.push(url)
 }
 </script>
 
